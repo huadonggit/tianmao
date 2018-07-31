@@ -1,0 +1,96 @@
+@import "var";
+*{
+  box-sizing:border-box;
+}
+.container{
+  &{
+    width:100%;
+    height:auto;
+    overflow: hidden;.clear()
+  }
+  &>.row{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+  }
+  .clear(){
+    &:before,&:after{
+      content:""; /*不用引号content="";*/
+      display:block;
+    }
+    &:after{
+      clear:both;
+    }
+  }
+  .respons(@type,@i:1) when (@i<=@cols){
+    &>.row>.col-@{type}-@{i}{/*.container会多一个 .container>.row>.col-@{type}-@{i}{*/
+      width:@i/@cols*100%;
+      float:left;
+    }
+    /*-@{i}多了&>.row>.col-@{type}-hid-@{i}{
+      display: none;
+    }
+    &>.row>.col-@{type}-hid{
+       display: none;
+     }*/
+    &>.row>.col-@{type}-push-@{i}{
+      position: relative;
+      left:@i/@cols*100%;
+    }
+    &>.row>.col-@{type}-pull-@{i}{
+      position: relative;
+      right:@i/@cols*100%;
+    }
+    .respons(@type,@i+1)
+  }
+  .respons(s);
+  &-fluid{
+    &{
+      width:100%;
+      height:auto;
+      overflow: hidden;.clear();
+    }
+    &>.row{
+      width:100%;
+      height:auto;
+      overflow: hidden;.clear();
+    }
+
+
+
+  }
+  @media screen and (min-width:@width1){
+    &{
+      width:100%;
+      height:auto;
+      overflow: hidden;.clear()
+    }
+    &>.row{
+      width:100%;
+      height:auto;
+      overflow: hidden;
+    }
+    &>.row>.col-m-hid{
+      display: none;
+    }
+    .respons(m);
+  }
+  @media screen and (min-width:@width2){
+    &{
+      width:100%;
+      height:auto;
+      overflow: hidden;.clear()
+    }
+    &>.row{
+      width:100%;
+      height:auto;
+      overflow: hidden;
+    }
+    &>.row>.col-l-hid{
+      display: none;
+    }
+    .respons(l);
+  }
+
+
+}

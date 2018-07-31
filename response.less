@@ -1,0 +1,106 @@
+@import "var";
+*{
+  box-sizing: border-box;
+}
+/*小屏幕尺寸*/
+.container{
+  &{
+    width:(@width1)-100px;
+    height:auto;
+    .clear();
+    margin:0 auto;
+  }
+  &>.row{
+    width:100%;
+    height:auto;
+    overflow: hidden;
+    margin:0 auto;
+  }
+  &-fluid{
+    width:100%;
+    height:auto;
+    .clear();
+    margin: 0 auto;
+  }
+  &-fluid>.row{
+    width:100%;height: auto;overflow: hidden;
+    margin:0 auto;
+  }
+}
+.res(s);
+.col-s-hid{
+  display: none;
+}
+.res(@type,@i:1) when (@i<=@cols){
+   .container>.row>.col-@{type}-@{i}{
+     float:left;
+     height:100%;
+     width:@i/@cols*100%;
+   }
+  .container-fluid>.row>.col-@{type}-@{i}{
+    width:@i/@cols*100%;
+    height:100%;
+    float:left;
+  }
+  .res(@type,@i+1);
+  /*向左，向右移动，改变margin-left*/
+  .container>.row>.col-@{type}-offsetr-@{i}{
+    margin-left:@i/@cols*100%;
+  }
+  .container>.row>.col-@{type}-offsetl-@{i}{
+    margin-left:-(@i/@cols*100%);
+  }
+  .container-fluid>.row>.col-@{type}-offsetr-@{i}{
+    margin-left:@i/@cols*100%;
+  }
+  .container-fluid>.row>.col-@{type}-offsetl-@{i}{
+    margin-left:-(@i/@cols*100%);
+  }
+/*任意元素换位置 定位 left/right值*/
+  .container>.row>.col-@{type}-push-@{i}{
+    position: relative;
+    left:@i/@cols*100%;
+  }
+  .container>.row>.col-@{type}-push-@{i}{
+    position: relative;
+    right:@i/@cols*100%;
+  }
+  .container-fluid>.row>.col-@{type}-push-@{i}{
+    position: relative;
+    left:@i/@cols*100%;
+  }
+  .container-fluid>.row>.col-@{type}-pull-@{i}{
+    position: relative;
+    right:@i/@cols*100%;
+  }
+}
+/*中等屏幕*/
+@media screen and (min-width:@width1){
+  .container{
+    width:@width1;
+  }
+  .res(m);
+  .col-m-hid{
+    display: none;
+  }
+}
+/*大屏幕*/
+@media screen and (min-width:@width2){
+  .container{
+    width:@width2;
+  }
+  .res(l);
+  .col-l-hid{
+    display: none;
+  }
+}
+.clear(){
+  &:before,&:after{
+     content:"";
+    display: block;
+  }
+  &:after{
+    clear:both;
+  }
+}
+

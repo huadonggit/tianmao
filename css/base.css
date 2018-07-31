@@ -1,0 +1,16 @@
+*{
+padding:0;margin:0;border:0;text-decoration:none;list-style:none;}
+.auto{
+	margin: 0 auto;}
+.fl{
+	float: left;}
+.fr{
+	float: right;}
+a{display: inline-block; }
+
+body{
+font:12px "Microsoft YaHei"
+}
+img{
+border:0;
+}
